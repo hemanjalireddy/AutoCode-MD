@@ -1,0 +1,23 @@
+from pydantic_settings import BaseSettings
+
+class Settings(BaseSettings):
+    # App Config
+    APP_NAME: str = "AutoCode MD"
+    VERSION: str = "0.1.0"
+    
+    # Paths
+    DATA_PATH: str = "data/icd10_guidelines.pdf"
+    
+    # Vector DB Config (Docker Service)
+    CHROMA_HOST: str = "localhost"
+    CHROMA_PORT: int = 8000
+    COLLECTION_NAME: str = "icd10_rules"
+    
+    # Model Config
+    EMBEDDING_MODEL: str = "sentence-transformers/all-MiniLM-L6-v2"
+
+    class Config:
+        env_file = ".env"
+
+# Singleton instance
+settings = Settings()

@@ -1,7 +1,7 @@
 import chromadb
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
-from src.core.settings import settings
+from src.backend.core.settings import settings
 from loguru import logger
 
 class VectorDBManager:

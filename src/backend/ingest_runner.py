@@ -1,8 +1,8 @@
 import argparse
 from loguru import logger
-from src.core.settings import settings
-from src.ingestion.loader import DocumentProcessor
-from src.database.vector_store import VectorDBManager
+from src.backend.core.settings import settings
+from src.backend.ingestion.loader import DocumentProcessor
+from src.backend.database.vector_store import VectorDBManager
 
 def run_ingestion():
     processor = DocumentProcessor(file_path=settings.DATA_PATH)

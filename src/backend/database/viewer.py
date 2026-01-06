@@ -1,7 +1,7 @@
 import streamlit as st
 import chromadb
 import pandas as pd
-from src.core.settings import settings
+from src.backend.core.settings import settings
 
 st.set_page_config(page_title="AutoCode MD - DB Viewer", layout="wide")
 st.title("🧠 AutoCode MD Database Viewer")

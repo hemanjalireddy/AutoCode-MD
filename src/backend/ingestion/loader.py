@@ -1,7 +1,7 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from loguru import logger  # <-- The new import
-from src.core.settings import settings
+from src.backend.core.settings import settings
 import os
 
 class DocumentProcessor:

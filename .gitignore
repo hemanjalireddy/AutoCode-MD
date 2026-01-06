@@ -1,0 +1,42 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Environment Variables (CRITICAL) ---
+# Never commit your API keys!
+.env
+.env.local
+
+# --- Virtual Environments (Poetry) ---
+.venv/
+venv/
+env/
+
+# --- IDE Settings ---
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm / IntelliJ
+.idea/
+*.iml
+
+# --- Docker ---
+# If you have local override files you don't want to share
+docker-compose.override.yml
+
+# --- OS Files ---
+.DS_Store
+Thumbs.db
+
+# --- Testing & Logs ---
+.pytest_cache/
+htmlcov/
+*.log
+src/backend/logs/
+
+# --- App Specific ---
+# Ignore locally uploaded test images if you save them to disk
+uploads/
+temp/

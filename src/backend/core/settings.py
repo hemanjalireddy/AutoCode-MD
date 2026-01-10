@@ -1,4 +1,5 @@
 from pydantic_settings import BaseSettings
+import os
 
 class Settings(BaseSettings):
     # App Config
@@ -24,6 +25,18 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         extra = "ignore"
+
+    POSTGRES_USER: str = os.getenv("POSTGRES_USER", "user")
+    POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD", "password")
+    POSTGRES_SERVER: str = os.getenv("POSTGRES_SERVER", "db")
+    POSTGRES_PORT: str = "5432"
+    POSTGRES_DB: str = "autocode"
+    TABLE_NAME : str = "medical_notes"
+    
+    # Construct the Database URL
+    @property
+    def DATABASE_URL(self) -> str:
+        return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
 
 # Singleton instance
 settings = Settings()

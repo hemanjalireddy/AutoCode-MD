@@ -1,6 +1,9 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from fastapi import APIRouter, UploadFile, File, HTTPException ,Depends
 from src.backend.services.vision import VisionService
+from sqlalchemy.orm import Session
 from src.backend.services.coding import CodingService
+from src.backend.database.database import get_db 
+from src.backend.database import crud
 from loguru import logger
 
 router = APIRouter()
@@ -8,7 +11,7 @@ vision_service = VisionService()
 coding_service = CodingService()
 
 @router.post("/digitize")
-async def digitize_note(file: UploadFile = File(...)):
+async def digitize_note(file: UploadFile = File(...) , db: Session = Depends(get_db)):
     """
     1. Uploads an image.
     2. Vision Service extracts text (Eyes).
@@ -19,12 +22,20 @@ async def digitize_note(file: UploadFile = File(...)):
     
     content = await file.read()
     try:
-        logger.info("Step 1: Extracting text from image...")
+        logger.info("Step 1: Extracting text from image")
         extracted_data = vision_service.analyze_medical_note(content)
 
-        logger.info("Step 2: Assigning medical codes...")
+        logger.info("Step 2: Assigning medical codes")
         coding_result = coding_service.generate_codes(extracted_data)
         logger.info("Digitization and coding complete.")
+
+        logger.info("Step 3: Saving to Database")
+        crud.create_medical_note(
+            db=db, 
+            extracted_data=extracted_data, 
+            coding_result=coding_result,
+            filename=file.filename
+        )
         
         return {
             "status": "success",

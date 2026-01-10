@@ -1,6 +1,6 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from loguru import logger  # <-- The new import
+from loguru import logger 
 from src.backend.core.settings import settings
 import os
 
@@ -17,7 +17,7 @@ class DocumentProcessor:
             # Log the error before crashing the app
             logger.error(f"File validation failed. Path does not exist: {self.file_path}")
             raise FileNotFoundError(f"File not found at: {self.file_path}")
-        logger.debug(f"✅ File validated at: {self.file_path}")
+        logger.debug(f"File validated at: {self.file_path}")
 
     def load_and_chunk(self):
         """

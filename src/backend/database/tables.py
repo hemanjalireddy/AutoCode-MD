@@ -24,3 +24,5 @@ class MedicalNote(Base):
     icd10_description = Column(String, nullable=True)
     reasoning = Column(Text, nullable=True)
     confidence_score = Column(Float, nullable=True)
+
+    

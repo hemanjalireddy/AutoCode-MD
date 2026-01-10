@@ -5,7 +5,7 @@ import os
 # Docker networking: 'backend' is the container name
 BACKEND_URL = os.getenv("BACKEND_URL", "http://backend:8000")
 
-st.set_page_config(page_title="CuraLogic - Day 2", layout="wide")
+st.set_page_config(page_title="AutoCode MD", layout="wide")
 st.title("🩺 Medical Note Digitizer")
 
 uploaded_file = st.file_uploader("Upload Doctor's Note", type=["jpg", "png", "jpeg"])

@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     EMBEDDING_MODEL: str = "sentence-transformers/all-MiniLM-L6-v2"
 
     VISION_MODEL: str = "meta-llama/llama-4-scout-17b-16e-instruct"
+    CODING_MODEL: str = "llama-3.3-70b-versatile"
 
     GROQ_API_KEY: str
 

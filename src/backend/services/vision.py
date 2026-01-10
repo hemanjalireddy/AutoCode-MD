@@ -8,7 +8,6 @@ from src.backend.models import NoteStructure
 
 class VisionService:
     def __init__(self, api_key: str = settings.GROQ_API_KEY, model: str = settings.VISION_MODEL):
-        # 👇 CRITICAL FIX: We must wrap the Groq client with instructor
         self.client = instructor.patch(
             Groq(api_key=api_key),
             mode=instructor.Mode.JSON
@@ -17,8 +16,6 @@ class VisionService:
 
     def _encode_image(self, image_bytes: bytes) -> str:
         return base64.b64encode(image_bytes).decode('utf-8')
-
-    # 👇 Update return type hint to NoteStructure (it returns an object, not a dict)
     def analyze_medical_note(self, image_bytes: bytes) -> NoteStructure:
         """
         Sends image to Llama 3.2 Vision and extracts structured JSON.
@@ -41,7 +38,6 @@ class VisionService:
         """
 
         try:
-            # Now this works because self.client is patched by instructor
             response = self.client.chat.completions.create(
                 messages=[
                     {
@@ -57,11 +53,11 @@ class VisionService:
                 ],
                 model=self.model,
                 temperature=0.0,
-                response_model=NoteStructure # <--- instructor handles this now
+                response_model=NoteStructure 
             )
             
             logger.success("Vision extraction successful")
-            return response # Returns a NoteStructure object
+            return response 
 
         except Exception as e:
             logger.exception(f"Vision Service Error: {e}")
